@@ -1,3 +1,4 @@
+import 'package:GestionPS/src/helpers/theme.dart';
 import 'package:GestionPS/src/routes/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'GPS',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: GPSColors.primary,
+        accentColor: GPSColors.secondary,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: Routes.getRoutes(),
