@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CommonWidgets {
-  static Widget getAppBar(context) {
+  static Widget getAppBar(contexta, {GlobalKey<ScaffoldState> scaffoldKey}) {
     return PreferredSize(
       child: SafeArea(
         child: Padding(
@@ -12,10 +12,15 @@ class CommonWidgets {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Icon(
-                  FontAwesomeIcons.bars,
-                  size: 30,
-                  semanticLabel: "Menu",
+                InkWell(
+                  child: Icon(
+                    FontAwesomeIcons.bars,
+                    size: 30,
+                    semanticLabel: "Menu",
+                  ),
+                  onTap: () {
+                    scaffoldKey.currentState.openDrawer();
+                  },
                 ),
                 Row(
                   children: <Widget>[
@@ -33,7 +38,7 @@ class CommonWidgets {
               ],
             )),
       ),
-      preferredSize: Size(DeviceScreen.getWidth(context), 100),
+      preferredSize: Size(DeviceScreen.getWidth(contexta), 100),
     );
   }
 }
