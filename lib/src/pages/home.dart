@@ -2,6 +2,7 @@ import 'package:GestionPS/src/helpers/screen.dart';
 import 'package:GestionPS/src/helpers/theme.dart';
 import 'package:GestionPS/src/widgets/base_scaffold.dart';
 import 'package:GestionPS/src/widgets/card_header.dart';
+import 'package:GestionPS/src/widgets/card_image.dart';
 import 'package:GestionPS/src/widgets/common_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -35,7 +36,7 @@ class _HomeState extends State<Home> {
             scrollDirection: Axis.horizontal,
             children: <Widget>[
               CardHeader(
-                desc: "Mis pedidos",
+                desc: "Pedidos",
                 urlImage: "assets/img/icon.png",
                 backgroundColor: GPSColors.primary[500],
               ),
@@ -57,37 +58,38 @@ class _HomeState extends State<Home> {
           width: DeviceScreen.getWidth(context),
           padding: EdgeInsets.only(left: 5, top: 10),
           child: Text(
-            "Marcas:",
+            "Ver catalogosaasas:",
             textAlign: TextAlign.left,
             style: TextStyle(fontSize: 15),
           ),
         ),
+        SizedBox(height: 10),
         Expanded(
           child: GridView.count(
-            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+            padding: EdgeInsets.only(left: 5, right: 5, bottom: 10),
             crossAxisCount: 2,
             crossAxisSpacing: 5,
             mainAxisSpacing: 5,
             children: <Widget>[
-              Container(
-                height: 350,
-                color: Colors.red,
+              CardImage(
+                marca: "Avon",
+                image: "assets/img/avon.jpg",
               ),
-              Container(
-                height: 350,
-                color: Colors.blue,
+              CardImage(
+                marca: "Jafra",
+                image: "assets/img/jafra.jpg",
               ),
-              Container(
-                height: 200,
-                color: Colors.blue,
+              CardImage(
+                marca: "Natura",
+                image: "assets/img/natura.jpg",
               ),
-              Container(
-                height: 200,
-                color: Colors.blue,
+              CardImage(
+                marca: "Price Shoes",
+                image: "assets/img/priceShoes.jpg",
               ),
-              Container(
-                height: 200,
-                color: Colors.blue,
+              CardImage(
+                marca: "TupperWare",
+                image: "assets/img/tupperWare.jpg",
               ),
             ],
           ),
