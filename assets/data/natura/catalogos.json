@@ -1,0 +1,12 @@
+[
+	{
+		"nombre": "Perfumes",
+		"image": "assets/img/perfNatura.jpg",
+		"productos": "assets/data/natura/perfumes.json"
+	},
+	{
+		"nombre": "Maquillaje",
+		"image": "assets/img/maquiNatura.jpg",
+		"productos": "assets/data/natura/maquillaje.json"
+	}
+]

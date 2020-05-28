@@ -1,0 +1,15 @@
+[
+	{
+		"id": 1,
+		"nombre": "Una - Base mousse FPS 15 - claro 24",
+		"cont": "N/D",
+		"desc": "Con la ayuda de sus dedos o un pincel, aplique pequeñas cantidades del producto en toda su rostro con movimientos de adentro hacia afuera. Extender suavemente hasta obtener una piel pareja.",
+		"image": "assets/img/92539.jpg",
+		"tonos": [
+			"0xffd6a27d",
+			"0xffd4936b",
+			"0xffbe8c63",
+			"0xffc0845d"
+		]
+	}
+]

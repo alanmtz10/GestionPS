@@ -84,22 +84,32 @@ class _HomeState extends State<Home> {
                     CardImage(
                       marca: "Avon",
                       image: "assets/img/avon.jpg",
+                      route: "catalogos",
+                      arguments: {"marca": "natura"},
                     ),
                     CardImage(
                       marca: "Jafra",
                       image: "assets/img/jafra.jpg",
+                      route: "catalogos",
+                      arguments: {"marca": "natura"},
                     ),
                     CardImage(
                       marca: "Natura",
                       image: "assets/img/natura.jpg",
+                      route: "catalogos",
+                      arguments: {"marca": "natura"},
                     ),
                     CardImage(
                       marca: "Price Shoes",
                       image: "assets/img/priceShoes.jpg",
+                      route: "catalogos",
+                      arguments: {"marca": "natura"},
                     ),
                     CardImage(
                       marca: "TupperWare",
                       image: "assets/img/tupperWare.jpg",
+                      route: "catalogos",
+                      arguments: {"marca": "natura"},
                     ),
                   ],
                 ),

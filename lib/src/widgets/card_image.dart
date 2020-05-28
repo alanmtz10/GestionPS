@@ -4,9 +4,16 @@ import 'package:flutter/material.dart';
 class CardImage extends StatelessWidget {
   final String marca;
   final String image;
+  final String route;
+  final Map<String, dynamic> arguments;
 
-  const CardImage({Key key, String this.marca, String this.image})
-      : super(key: key);
+  const CardImage({
+    Key key,
+    String this.marca,
+    String this.image,
+    String this.route = null,
+    Map<String, dynamic> this.arguments = null,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +53,9 @@ class CardImage extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Text(
                 this.marca,
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: this.marca.length < 20 ? 22 : 15,
                   color: GPSColors.white,
                 ),
               ),
@@ -55,9 +63,13 @@ class CardImage extends StatelessWidget {
           ],
         ),
       ),
-		onTap: (){
-			print("Hola");
-		},
+      onTap: () {
+        if (this.arguments != null && this.route != null) {
+          Navigator.pushNamed(context, this.route, arguments: this.arguments);
+        } else if (this.route != null) {
+          Navigator.pushNamed(context, this.route);
+        }
+      },
     );
   }
 }
