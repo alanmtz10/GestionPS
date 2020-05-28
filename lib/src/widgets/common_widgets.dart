@@ -25,13 +25,13 @@ class CommonWidgets {
                 Row(
                   children: <Widget>[
                     Text(
-                      "Authenticated username",
+                      "Alan",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(width: 5),
                     CircleAvatar(
-                      backgroundColor: GPSColors.tertiary,
+                      backgroundImage: AssetImage("assets/img/avatar.png"),
                     ),
                   ],
                 )
@@ -42,10 +42,44 @@ class CommonWidgets {
     );
   }
 
-  static Widget getDrawer() {
+  static Widget getDrawer(contexto) {
     return Drawer(
-      elevation: 5,
-      child: Center(child: Text("asdsad")),
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            child: Text('Drawer Header'),
+            decoration: BoxDecoration(
+              color: GPSColors.primary[500],
+            ),
+          ),
+          ListTile(
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Icon(FontAwesomeIcons.home),
+                Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                Text('Inicio')
+              ],
+            ),
+            onTap: () {
+              Navigator.pushNamedAndRemoveUntil(
+                  contexto, "home", (route) => false);
+            },
+          ),
+          ListTile(
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Icon(FontAwesomeIcons.signOutAlt),
+                Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                Text('Cerrar sesión')
+              ],
+            ),
+            onTap: () {},
+          ),
+        ],
+      ),
     );
   }
 }

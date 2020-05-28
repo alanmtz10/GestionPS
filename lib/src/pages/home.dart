@@ -15,11 +15,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final key = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonWidgets.getAppBar(context),
-      drawer: CommonWidgets.getDrawer(),
+      key: key,
+      appBar: CommonWidgets.getAppBar(context, scaffoldKey: key),
+      drawer: CommonWidgets.getDrawer(context),
       body: SingleChildScrollView(
         child: Container(
           height: DeviceScreen.getHeight(context) - 100,
