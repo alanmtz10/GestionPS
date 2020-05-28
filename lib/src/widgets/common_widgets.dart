@@ -41,4 +41,11 @@ class CommonWidgets {
       preferredSize: Size(DeviceScreen.getWidth(contexta), 100),
     );
   }
+
+  static Widget getDrawer() {
+    return Drawer(
+      elevation: 5,
+      child: Center(child: Text("asdsad")),
+    );
+  }
 }
