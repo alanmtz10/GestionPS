@@ -29,6 +29,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
   font_awesome_flutter: ^8.8.1
+  advance_pdf_viewer: any
 
 dev_dependencies:
   flutter_test:
@@ -47,6 +48,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+   -  assets/
    -	assets/img/
    -	assets/data/natura/
 
