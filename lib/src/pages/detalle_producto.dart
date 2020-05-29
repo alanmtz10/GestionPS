@@ -37,8 +37,8 @@ class DetalleProducto extends StatelessWidget {
   }
 
   Future<PDFDocument> getPDF() async {
-    PDFDocument doc = await PDFDocument.fromAsset(
-      "assets/TheLookMayoJunio2020.pdf",
+    PDFDocument doc = await PDFDocument.fromURL(
+      "https://firebasestorage.googleapis.com/v0/b/ventaporcatalogo-75a2e.appspot.com/o/TheLookMayoJunio2020.pdf?alt=media&token=c48df83f-d0bd-489f-ac10-f1339439f78c",
     );
 
     return doc;

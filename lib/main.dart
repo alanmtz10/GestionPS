@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: Routes.getRoutes(),
-      initialRoute: "home",
+      initialRoute: "inicioSesion",
     );
   }
 }
