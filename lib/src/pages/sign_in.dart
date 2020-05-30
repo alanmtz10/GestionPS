@@ -1,5 +1,6 @@
 import 'package:GestionPS/src/helpers/screen.dart';
 import 'package:GestionPS/src/helpers/theme.dart';
+import 'package:GestionPS/src/pages/register.dart';
 import 'package:flutter/material.dart';
 
 class IniciarSesion extends StatefulWidget {
@@ -25,7 +26,8 @@ class _IniciarSesionState extends State<IniciarSesion> {
               decoration: BoxDecoration(
                 color: GPSColors.tertiary,
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(120),
+                  bottomLeft: Radius.circular(360),
+                  bottomRight: Radius.circular(360),
                 ),
               ),
               child: Center(
@@ -37,13 +39,6 @@ class _IniciarSesionState extends State<IniciarSesion> {
                       size: 150,
                       color: GPSColors.white,
                     ),
-                    Text(
-                      "Iniciar sesión",
-                      style: TextStyle(
-                        fontSize: 40,
-                        color: GPSColors.white,
-                      ),
-                    )
                   ],
                 ),
               ),
@@ -124,13 +119,22 @@ class _IniciarSesionState extends State<IniciarSesion> {
                         children: <Widget>[
                           Container(
                             width: 50,
-                            child: Icon(Icons.person_add),
+                            child: Hero(
+                              tag: "registerBtn",
+                              child: Icon(Icons.person_add),
+                            ),
                           ),
                           Text("Registrarme"),
                         ],
                       ),
                       onPressed: () {
-                        Navigator.of(context).pushNamed("register");
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            transitionDuration: Duration(milliseconds: 700),
+                            pageBuilder: (_, __, ___) => Register(),
+                          ),
+                        );
                       },
                     )
                   ],

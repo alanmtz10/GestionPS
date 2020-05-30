@@ -11,6 +11,7 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
+  int _typeUser = null;
 
   @override
   Widget build(BuildContext context) {
@@ -27,25 +28,22 @@ class _RegisterState extends State<Register> {
               decoration: BoxDecoration(
                 color: GPSColors.tertiary,
                 borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(120),
+                  bottomRight: Radius.circular(360),
+                  bottomLeft: Radius.circular(360),
                 ),
               ),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Icon(
-                      Icons.person_add,
-                      size: 150,
-                      color: GPSColors.white,
-                    ),
-                    Text(
-                      "Registrarme",
-                      style: TextStyle(
-                        fontSize: 40,
+                    Hero(
+                      tag: "registerBtn",
+                      child: Icon(
+                        Icons.person_add,
+                        size: 150,
                         color: GPSColors.white,
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -128,6 +126,27 @@ class _RegisterState extends State<Register> {
                         return "Por favor ingrese una contraseña con 8 caracteres o mas";
                       },
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    DropdownButton(
+                        isExpanded: true,
+                        value: _typeUser,
+                        hint: Text("Tipo de usuario"),
+                        items: [
+                          DropdownMenuItem(
+                            value: 0,
+                            child: Text("Vendedor"),
+                          ),
+                          DropdownMenuItem(
+                            value: 1,
+                            child: Text("Cliente"),
+                          ),
+                        ],
+                        onChanged: (_) {
+                          _typeUser = _;
+                          this.setState(() {});
+                        }),
                     SizedBox(height: 20),
                     SizedBox(
                       height: 30,
