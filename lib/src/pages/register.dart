@@ -1,5 +1,7 @@
 import 'package:GestionPS/src/helpers/screen.dart';
 import 'package:GestionPS/src/helpers/theme.dart';
+import 'package:GestionPS/src/models/user.dart';
+import 'package:GestionPS/src/providers/authProvider.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
@@ -10,12 +12,22 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
+
+  /**
+	 * FIELDS FOR REGISTER USER
+	*/
   int _typeUser = null;
+  String _name = null;
+  String _email = null;
+  String _password = null;
+  String _confirPassword = null;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         padding:
@@ -68,6 +80,9 @@ class _RegisterState extends State<Register> {
                         }
                         return "Por favor ingrese su nombre";
                       },
+                      onSaved: (value) {
+                        _name = value;
+                      },
                     ),
                     TextFormField(
                       cursorColor: GPSColors.secondary,
@@ -81,12 +96,14 @@ class _RegisterState extends State<Register> {
                             r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
 
                         if (value.isNotEmpty) {
-                          return emailRegExp.hasMatch(value)
-                              ? null
-                              : "Por favor ingrese un email válido";
+                          if (emailRegExp.hasMatch(value)) {
+                            return null;
+                          }
                         }
-
                         return "Por favor ingrese un email válido";
+                      },
+                      onSaved: (value) {
+                        _email = value;
                       },
                     ),
                     SizedBox(
@@ -101,12 +118,14 @@ class _RegisterState extends State<Register> {
                       ),
                       validator: (value) {
                         if (value.isNotEmpty) {
-                          return value.length >= 8
-                              ? null
-                              : "Por favor ingrese una contraseña con 8 caracteres o mas";
+                          if (value.length >= 8) {
+                            return null;
+                          }
                         }
-
                         return "Por favor ingrese una contraseña con 8 caracteres o mas";
+                      },
+                      onSaved: (value) {
+                        _password = value;
                       },
                     ),
                     TextFormField(
@@ -117,10 +136,9 @@ class _RegisterState extends State<Register> {
                         labelText: "Confirmar contraseña",
                       ),
                       validator: (value) {
-                        if (value.isNotEmpty) {
-                          return value.length >= 8
-                              ? null
-                              : "Por favor ingrese una contraseña con 8 caracteres o mas";
+                        if (value.isNotEmpty && value.length >= 8) {
+                          _confirPassword = value;
+                          return null;
                         }
 
                         return "Por favor ingrese una contraseña con 8 caracteres o mas";
@@ -143,8 +161,8 @@ class _RegisterState extends State<Register> {
                             child: Text("Cliente"),
                           ),
                         ],
-                        onChanged: (_) {
-                          _typeUser = _;
+                        onChanged: (value) {
+                          _typeUser = value;
                           this.setState(() {});
                         }),
                     SizedBox(height: 20),
@@ -165,7 +183,19 @@ class _RegisterState extends State<Register> {
                         ],
                       ),
                       onPressed: () {
-                        _formKey.currentState.validate();
+                        if (_formKey.currentState.validate() &&
+                            _typeUser != null) {
+                          _formKey.currentState.save();
+
+                          User usuario = User(
+                            name: _name,
+                            email: _email,
+                            password: _password,
+                            typeUser: _typeUser,
+                          );
+
+                          register(usuario);
+                        }
                       },
                     ),
                     RaisedButton(
@@ -192,6 +222,47 @@ class _RegisterState extends State<Register> {
           ],
         ),
       ),
+    );
+  }
+
+  void register(User usuario) async {
+    _onLoading();
+    bool res = await AuthProvider.registerUser(usuario);
+    Navigator.pop(context);
+
+    if (res) {
+      Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
+    } else {
+      _scaffoldKey.currentState.showSnackBar(
+        SnackBar(
+          content: Text(
+            "Error al registrar usuario",
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
+  }
+
+  void _onLoading() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                CircularProgressIndicator(),
+                SizedBox(height: 10),
+                Text("Iniciando sesión"),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

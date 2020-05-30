@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "708146561216",
+    "firebase_url": "https://ventaporcatalogo-75a2e.firebaseio.com",
+    "project_id": "ventaporcatalogo-75a2e",
+    "storage_bucket": "ventaporcatalogo-75a2e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708146561216:android:9b31973e33dd5ce5e1ad25",
+        "android_client_info": {
+          "package_name": "tecnm.toluca.ventaporcatalogo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "708146561216-q98pam7mgf24n3ffdb3qlsise991gl8d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJopPL6ZyN7OsEBNYopBMgjQkzerPUgLY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "708146561216-q98pam7mgf24n3ffdb3qlsise991gl8d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

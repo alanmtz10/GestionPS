@@ -1,3 +1,5 @@
+import 'package:GestionPS/src/models/user.dart';
+import 'package:GestionPS/src/providers/authProvider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:GestionPS/src/helpers/screen.dart';
@@ -16,6 +18,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final key = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

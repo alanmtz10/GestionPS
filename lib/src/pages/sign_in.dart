@@ -1,6 +1,7 @@
 import 'package:GestionPS/src/helpers/screen.dart';
 import 'package:GestionPS/src/helpers/theme.dart';
 import 'package:GestionPS/src/pages/register.dart';
+import 'package:GestionPS/src/providers/authProvider.dart';
 import 'package:flutter/material.dart';
 
 class IniciarSesion extends StatefulWidget {
@@ -11,11 +12,15 @@ class IniciarSesion extends StatefulWidget {
 }
 
 class _IniciarSesionState extends State<IniciarSesion> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _formKey = GlobalKey<FormState>();
+  String _email = null;
+  String _password = null;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Column(
@@ -69,6 +74,9 @@ class _IniciarSesionState extends State<IniciarSesion> {
 
                         return "Por favor ingrese un email válido";
                       },
+                      onSaved: (value) {
+                        _email = value;
+                      },
                     ),
                     SizedBox(
                       height: 10,
@@ -82,12 +90,15 @@ class _IniciarSesionState extends State<IniciarSesion> {
                       ),
                       validator: (value) {
                         if (value.isNotEmpty) {
-                          return value.length <= 8
+                          return value.length >= 8
                               ? null
                               : "Por favor ingrese una contraseña con 8 caracteres o mas";
                         }
 
                         return "Por favor ingrese una contraseña con 8 caracteres o mas";
+                      },
+                      onSaved: (value) {
+                        _password = value;
                       },
                     ),
                     SizedBox(height: 20),
@@ -108,7 +119,10 @@ class _IniciarSesionState extends State<IniciarSesion> {
                         ],
                       ),
                       onPressed: () {
-                        _formKey.currentState.validate();
+                        if (_formKey.currentState.validate()) {
+                          _formKey.currentState.save();
+                          login();
+                        }
                       },
                     ),
                     RaisedButton(
@@ -144,6 +158,47 @@ class _IniciarSesionState extends State<IniciarSesion> {
           ],
         ),
       ),
+    );
+  }
+
+  void login() async {
+    _onLoading();
+    bool res = await AuthProvider.loginUser(_email, _password);
+    Navigator.pop(context);
+
+    if (res) {
+      Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
+    } else {
+      _scaffoldKey.currentState.showSnackBar(
+        SnackBar(
+          content: Text(
+            "Error al iniciar sesión",
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
+  }
+
+  void _onLoading() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                CircularProgressIndicator(),
+                SizedBox(height: 10),
+                Text("Iniciando sesión"),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
